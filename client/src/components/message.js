@@ -2,7 +2,7 @@ import { Component } from "react";
 export default class Message extends Component {
   render() {
     return (
-      <div className="flex flex-row">
+      <>
         <input
           className="bg-slate-600 basis-4/5 m-2 text-left px-4  p-1 font-extralight text-lg duration-300  rounded-lg outline-none text-white"
           type="text"
@@ -21,7 +21,7 @@ export default class Message extends Component {
         >
           Send
         </button>
-      </div>
+      </>
     );
   }
 }

@@ -12,6 +12,7 @@ function App() {
   const [room, setRoom] = useState("");
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+  const [settedUsername, setSettedUsername] = useState(false);
 
   const sendMessage = async () => {
     if (username !== "" && room !== "" && message !== "") {
@@ -39,55 +40,65 @@ function App() {
 
   useEffect(() => {
     if (room !== "") chatUpdate(room);
-  },[room]);
+  }, [room]);
 
   return (
     <div className="App flex flex-col container mx-auto duration-300">
-      <div className="flex justify-center">
-        <input
-          className="m-2 bg-[#191d20] text-white text-center p-1 font-extralight text-lg duration-300 border-b-2 focus:border-b-emerald-400 outline-none"
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-      </div>
-
-      <div className="flex w-full duration-300 h-screen">
-        <div className="flex flex-col w-full rounded-md duration-300">
-          <div className="duration-300 rounded-t-md w-full h-12 shadow-2xl bg-emerald-500 text-2xl text-neutral-50 font-mono font-extrabold pt-2">
-            Room: {room}
-          </div>
-
-          <div className="duration-300 flex flex-row w-full h-full rounded-b-md">
-            <div className="w-1/4 bg-slate-900 drop-shadow-xl rounded-bl-md duration-300">
-              <Rooms setRoom={setRoom} chatUpdate={chatUpdate} />
+      {settedUsername != false ? (
+          <div className="flex flex-col h-screen w-full rounded-md duration-300">
+            <div className="duration-300 rounded-t-md w-full shadow-2xl bg-emerald-500 text-2xl text-neutral-50 font-mono font-extrabold pt-2">
+              Room: {room}
             </div>
-            {room !== "" ? (
-              <div className="flex flex-col w-3/4 h-full rounded-br-md duration-300">
-                <div className="w-full h-full bg-slate-500 duration-300">
-                  <Chat chat={chat} room={room} username={username} />
-                </div>
-                <div className="w-full bg-slate-700 rounded-br-md duration-300 ">
-                  <Message
-                    message={message}
-                    setMessage={setMessage}
-                    sendMessage={sendMessage}
-                  />
-                </div>
+            <div className="duration-300 flex flex-row w-full h-full rounded-b-md">
+              <div className="w-1/4 bg-slate-900 drop-shadow-xl h-full rounded-bl-md duration-300">
+                <Rooms setRoom={setRoom} chatUpdate={chatUpdate} />
               </div>
-            ) : (
-              <div className="flex flex-col w-3/4 rounded-br-md bg-slate-500 duration-300">
-                <div className="my-auto">
-                  Welcome to Chat, please select room
+              {room !== "" ? (
+                <div className="flex flex-col w-3/4 h-full rounded-br-md duration-300">
+                  <div className="w-full bg-slate-500 duration-300 h-full overflow-auto">
+                    <Chat chat={chat} room={room} username={username} />
+                  </div>
+                  <div className="w-full bg-slate-700 rounded-br-md duration-300 flex flex-row ">
+                    <Message
+                      message={message}
+                      setMessage={setMessage}
+                      sendMessage={sendMessage}
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="flex flex-col w-3/4 rounded-br-md bg-slate-500 duration-300">
+                  <div className="my-auto">
+                    Welcome to Chat, please select room
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+      ) : (
+        <div>
+          <div className="flex justify-center align-middle">
+            <input
+              className="m-2 bg-[#191d20] text-white text-center p-1 font-extralight text-lg duration-300 border-b-2 focus:border-b-emerald-400 outline-none"
+              type="text"
+              placeholder="please set username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
+            <button
+              className="p-5 bg-emerald-400 w-min h-min m-2 rounded-xl"
+              onClick={() => {
+                if (username == "") return alert("Please set valid username");
+                setSettedUsername(true);
+              }}
+            >
+              SET
+            </button>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
