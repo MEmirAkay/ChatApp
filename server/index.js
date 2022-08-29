@@ -26,8 +26,8 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`User with id : ${socket.id} joined room : ${data}`);
-  });
+    console.log(`User connected room {${data}} with id {${socket.id}}`)
+    });
 
   socket.on("chatUpdate",(room)=>{
  
@@ -37,14 +37,12 @@ io.on("connection", (socket) => {
       
     });
 
-    
-
-
   })
 
   socket.on("send_message", (data) => {
+    
     socket.to(data.room).emit("receive_message", data);
-    console.log("message from :", socket.id, "\nMessage: ", data);
+
     var messageDetails = new messageModel({
       username: data.username,
       room: data.room,
@@ -55,8 +53,10 @@ io.on("connection", (socket) => {
   
     messageDetails.save((err, result) => {
       if (err) throw err;
-      console.log(result);
     });
+
+    
+
   });
 
   socket.on("disconnect", () => {

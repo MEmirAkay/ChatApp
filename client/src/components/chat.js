@@ -1,11 +1,18 @@
 import { Component } from "react";
+import ScrollToBottom from 'react-scroll-to-bottom';
+
 export default class Chat extends Component {
+
   render() {
+
+    
+
     return (
-      <div className="h-fit px-5 ">
+      <ScrollToBottom>
         {this.props.chat.map((e) => {
           return this.props.username === e.username ? (
-            <div className="flex w-full" style={{"justifyContent": "end"}} >
+            <div key={e._id} className="flex w-full px-5" style={{"justifyContent": "end"}} >
+             
               <div className="flex flex-col w-min h-min py-2 my-2 px-4 text-white  bg-slate-700 rounded-md shadow-lg">
                 <div className=" hidden">{e._id} </div>
                 <div className="text-start font-semibold text-sm text-red-400">
@@ -20,7 +27,7 @@ export default class Chat extends Component {
               </div>
             </div>
           ) : (
-            <div className="flex w-full" style={{"justifyContent": "start"}}>
+            <div key={e._id} className="flex w-full px-5" style={{"justifyContent": "start"}}>
               <div className="flex flex-col w-min h-min py-2 my-2 px-4 text-white  bg-slate-700 rounded-md shadow-lg">
                 <div className=" hidden">{e._id} </div>
                 <div className="text-start font-semibold text-sm text-red-400">
@@ -36,7 +43,7 @@ export default class Chat extends Component {
             </div>
           );
         })}
-      </div>
+      </ScrollToBottom>
     );
   }
 }

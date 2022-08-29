@@ -8,4 +8,7 @@
 
 body{
   background-color: #191d20;
+  margin: auto auto;
+  width: fit-content;
+  height: fit-content;
 }
