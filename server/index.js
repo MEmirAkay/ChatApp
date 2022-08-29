@@ -9,6 +9,9 @@ var conn = require("./util/connection");
 app.use(cors());
 const server = http.createServer(app);
 
+app.get('/', (req, res) => {
+  res.send('There is no route.')
+})
 
 const d = new Date();
 let date = d.getDate()+"."+d.getMonth()+"."+d.getFullYear();
