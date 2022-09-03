@@ -9,6 +9,8 @@ var conn = require("./util/connection");
 app.use(cors());
 const server = http.createServer(app);
 
+const PORT = process.env.PORT || 5000
+
 app.get('/', (req, res) => {
   res.send('There is no route.')
 })
@@ -67,6 +69,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
+server.listen(PORT, () => {
   console.log("Server up and running...");
 });

@@ -30,18 +30,19 @@ function App() {
     }
   };
 
-
-
   const chatUpdate = async (e) => {
     socket.emit("join_room", e);
   };
 
   useEffect(() => {
     if (room !== "") socket.emit("chatUpdate", room);
-    socket.on("receive_chat", (data) => {
-     setChat(data);
-   },[socket]);;
-    
+    socket.on(
+      "receive_chat",
+      (data) => {
+        setChat(data);
+      },
+      [socket]
+    );
   });
 
   return (
@@ -50,8 +51,9 @@ function App() {
         <div className="flex flex-col h-screen w-full rounded-md duration-300">
           <div className="duration-300 flex flex-row w-full h-full items-start rounded-b-md">
             <div className="w-1/4 bg-slate-900 flex flex-col justify-start h-full  drop-shadow-xl rounded-bl-md duration-300">
-              <div className="duration-300  w-full shadow-2xl bg-emerald-500 text-2xl text-neutral-50 font-mono font-extrabold ">
-                Room: {room}
+              <div className="duration-300  w-full shadow-2xl text-2xl text-neutral-50 font-mono font-extrabold ">
+                <div className="bg-emerald-500">Room: {room} </div>
+                <div className=" bg-sky-500">User: {username}</div>
               </div>
               <Rooms setRoom={setRoom} chatUpdate={chatUpdate} />
             </div>
