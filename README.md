@@ -12,7 +12,9 @@
 
 </div>
 
----
+<p>
+<img src="./img/chatapp.gif" alt="Project">
+</p>
 
 <p align="center"> Chat App
     <br> 
