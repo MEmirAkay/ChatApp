@@ -31,7 +31,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Cloned WhatsApp
+Chat app
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
